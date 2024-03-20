@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+# metadata is dictonary in which other key value pair will be there
+metadata:
+  name: myapp
+  labels: 
+    name: myapp-nginx
+    type: BackEnd
+# under spec, ports, containers all the things will be specified
+spec:
+  # containers will be list of key val pairs regarding multiple containers
+  # better to keep one container per pod 
+  containers:
+  -  name: nginx
+     image: nginx

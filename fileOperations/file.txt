@@ -1,0 +1,10 @@
+In the example above we read the file chunk by chunk, specifying which is the buffer size we want to read each time.
+Only len(buf) is allocated in memory and read at each iteration. This is specifically ideal for large files,
+where content cannot fit entirely into memory. Notice how we break the loop once we receive an io.EOF error,
+which defines the end of the file.
+HTTP 1.1 did not have built-in support for header compression, so headers were sent in plain text, which meant that they took up a 
+significant amount of bandwidth. As a result, while sending large numbers of headers or when sending headers over slow connections,
+ problems were faced.
+
+These are the major reasons why HTTP 1.1 was replaced. However, there are other differences between the two versions. So first,
+let us compare both of them.
