@@ -49,34 +49,6 @@ func findThreesumTriplets(data []int) [][]int {
 
 }
 
-// func findThreesumTriplets(data []int) [][]int {
-// 	results := make([][]int, 0)
-// 	if data == nil || len(data) < 3 {
-// 		return results
-// 	}
-// 	for i := 0; i < len(data)-2; i++ {
-// 		// fix 1st element, take left pointer(starting from 2nd index) and right pointer(which is starting from last index)
-// 		// and do the addition, if matches then return the values, if <0, then increase left pointer, else decrese right pointer
-// 		left := i + 1
-// 		right := len(data) - 2
-// 		sum := data[i] + data[left] + data[right]
-// 		if sum == 0 {
-// 			result := make([]int, 0)
-// 			result = append(result, data[i], data[left], data[right])
-// 			results = append(results, result)
-// 			left++
-// 			right--
-// 		} else if sum < 0 {
-// 			left++
-// 		} else {
-// 			right--
-// 		}
-
-// 	}
-// 	return results
-
-// }
-
 func main() {
 	data := []int{-1, 0, 1, 2, -1, 4}
 	result := findThreesumTriplets(data)
