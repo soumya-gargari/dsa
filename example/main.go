@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	w1, w2 := "abcfghjk", "fghjkl"
@@ -11,6 +13,46 @@ func main() {
 	fmt.Println("longest common sequence is:", resultLength)
 	data := "hbfwbbjabcfghjkll"
 	fmt.Println("longest common sub string is:", findLongestCommonSubString(data))
+	datas := []int{3, 5, 45, 67, 89, 90}
+	fmt.Println("is data found:", binarySearch(datas, 6))
+
+	// sliding window algo
+	arrays := []int{-2, -1, 9, 5, -3, 9, 1, 8}
+	fmt.Println("max sum within the window is:", slidingWindow(arrays, 4))
+}
+
+func slidingWindow(data []int, k int) int {
+	maxSum := 0
+	sum := 0
+	for i := 0; i < k; i++ {
+		sum += data[i]
+	}
+	maxSum = sum
+	for i := k; i < len(data); i++ {
+		sum = sum - data[i-k] + data[i]
+		if sum > maxSum {
+			maxSum = sum
+		}
+	}
+	return maxSum
+}
+
+func binarySearch(data []int, val int) bool {
+	low := 0
+	high := len(data) - 1
+	for low <= high {
+		mid := (low + high) / 2
+		if data[mid] == val {
+			fmt.Println("found at index:", mid)
+			return true
+		}
+		if val < data[mid] {
+			high--
+		} else {
+			low++
+		}
+	}
+	return false
 }
 
 func findLongestCommonSubString(data string) string {
