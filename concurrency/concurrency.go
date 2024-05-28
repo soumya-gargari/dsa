@@ -109,15 +109,6 @@ func main() {
 	// randIntStream is channel where we are sending integers
 	randIntStream := repeatFunc(done, randIntFetcher)
 	// stage 2
-	// primeFinder is channel where we are checking in randstream if any prime numbers are there or not
-	// primeFinder := primerFinder(done, randIntStream)
-	// // stage 3
-	// // send this prime channel in take func and print the values
-	// // naive approach
-	// for val := range take(done, primeFinder, 20) {
-	// 	fmt.Println("val is:", val)
-	// }
-
 	//fanout pattern to create multiple fanout process or goroutines and run it concurrently
 	CPUCount := runtime.NumCPU()
 	// fmt.Println(CPUCount)

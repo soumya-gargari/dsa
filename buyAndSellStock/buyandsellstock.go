@@ -18,4 +18,5 @@ func main() {
 	}
 
 	fmt.Println("max profit is:", profit)
+
 }

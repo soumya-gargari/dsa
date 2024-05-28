@@ -5,10 +5,7 @@ import "fmt"
 func partition(arr []int, low, high int) int {
 	i := low
 	j := high
-	pivot := arr[i]
-	// if len(arr) < 2 {
-	// 	return arr[0]
-	// }
+	pivot := arr[low]
 	// keeping i< j as we should have atleast 2 elements in array,
 	for i < j {
 		// if arr[i] is less thgan pivot value, increment i as pivot will be middle value of array
@@ -41,7 +38,7 @@ func quicksort(a []int, low, high int) {
 }
 
 func main() {
-	data := []int{3, 2, 67, 45, 89, 1}
+	data := []int{3, 2, 6, 4, 8, 79, 76, 65, 89, 77, 12, 10}
 	high := len(data) - 1
 	quicksort(data, 0, high)
 	fmt.Println(data)

@@ -24,6 +24,8 @@ func (a *array) findLargestNum() {
 	fmt.Println("largest number within the array is:", maxVal)
 }
 
+
+// [3, 2, 4, 1]
 func (a *array) find2ndLargestNum() {
 	large1 := a.data[0]
 	large2 := 0

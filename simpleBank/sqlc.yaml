@@ -1,0 +1,11 @@
+version: "1"
+packages:
+  - name: "db"
+    path: "./db/sqlc" #  path where auto generated go code will be stored 
+    queries: "./db/query/" # path where db queries will be written
+    schema: "./db/migration/" # path where migration schemas are present
+    engine: "postgresql"
+    emit_json_tags: true # to keep the json tags in the structure
+    emit_prepared_queries: false
+    emit_interface: false
+    emit_exact_table_names: false

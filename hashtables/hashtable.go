@@ -98,6 +98,7 @@ func hash(data string) int {
 	}
 	return (sum % ArraySize)
 }
+
 func main() {
 	hashTable := Init()
 	hashTable.Insert("soumya")

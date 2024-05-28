@@ -6,39 +6,18 @@ import (
 	"strings"
 )
 
-// func checkAnagram(data1, data2 string) bool {
-// 	if data1 == "" || data2 == "" {
-// 		return false
-// 	}
-// 	if len(data1) == len(data2) {
-// 		result1 := strings.Split(data1, "")
-// 		result2 := strings.Split(data2, "")
-// 		sort.Strings(result1)
-// 		sort.Strings(result2)
-// 		fmt.Println(result1, result2)
-// 		data1 = strings.Join(result1, "")
-// 		data2 = strings.Join(result2, "")
-// 		fmt.Println(data1, data2)
-// 		return data1 == data2
-// 	}
-// 	return false
-// }
-
 func checkAnagram(data1, data2 string) bool {
-	a := strings.Split(data1, "")
-	b := strings.Split(data2, "")
-	sort.Slice(a, func(i, j int) bool {
-		return a[i] < a[j]
+	w1 := strings.Split(data1, "")
+	sort.Slice(w1, func(i, j int) bool {
+		return w1[i] < w1[j]
 	})
-	sort.Slice(b, func(i, j int) bool {
-		return b[i] < b[j]
+	w2 := strings.Split(data2, "")
+	sort.Slice(w2, func(i, j int) bool {
+		return w2[i] < w2[j]
 	})
-	fmt.Println(a, b)
-	// sort.Strings(a)
-	// sort.Strings(b)
-	data1 = strings.Join(a, "")
-	data2 = strings.Join(b, "")
-	fmt.Println(data1, data2)
+	fmt.Println(w1, w2)
+	data1 = strings.Join(w1, "")
+	data2 = strings.Join(w2, "")
 	return data1 == data2
 }
 
