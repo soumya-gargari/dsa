@@ -45,6 +45,9 @@ func minSizeSubArray(data []int, target int) int {
 			low++
 		}
 	}
+	if minWindowSize == math.MaxInt {
+		return 0
+	}
 	fmt.Println(low, high)
 	return minWindowSize
 }
