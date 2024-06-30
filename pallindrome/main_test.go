@@ -16,7 +16,7 @@ func TestIsPallindrome(t *testing.T) {
 	for _, tc := range testCases {
 		result := isPallindrome(tc.data)
 		if result != tc.expected {
-			t.Errorf("expected %v, go %v", tc.expected, result)
+			t.Errorf("expected %v, got %v", tc.expected, result)
 		}
 	}
 }

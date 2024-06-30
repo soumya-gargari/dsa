@@ -93,35 +93,54 @@ func (s *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferT
 		fmt.Println(txName, "created entry2")
 		// TODO: update account as it includes db lock
 
-		// update the amount in fromAccount
-		account1, err := q.GetAccountForUpdate(ctx, arg.FromAccountID)
-		if err != nil {
-			return err
-		}
+		// update the amount in fromAccount - debited
 		fmt.Println(txName, "get account for update1")
-		err = q.UpdateAccount(ctx, UpdateAccountParams{
-			ID:      arg.FromAccountID,
-			Balance: account1.Balance - arg.Amount,
-		})
-		if err != nil {
-			return err
+
+		// To avoid deadlock, query statements order is also important
+		// for ex: if we update account 1, do the operation on account1 again,
+		// then do the operations on account2
+
+		// TODO: put below repeated code in a single function
+		if arg.FromAccountID < arg.ToAccountID {
+			err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+				ID:     arg.FromAccountID,
+				Amount: -arg.Amount,
+			})
+			if err != nil {
+				return err
+			}
+			fmt.Println(txName, "update account1")
+			// update the amount in ToAccount - credited
+			err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+				ID:     arg.ToAccountID,
+				Amount: arg.Amount,
+			})
+			if err != nil {
+				return err
+			}
+			fmt.Println(txName, "update account2")
+			return nil
+		} else {
+			err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+				ID:     arg.ToAccountID,
+				Amount: arg.Amount,
+			})
+			if err != nil {
+				return err
+			}
+			fmt.Println(txName, "update account1")
+			// update the amount in ToAccount - credited
+			err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+				ID:     arg.FromAccountID,
+				Amount: -arg.Amount,
+			})
+			if err != nil {
+				return err
+			}
+			fmt.Println(txName, "update account2")
+			return nil
+
 		}
-		fmt.Println(txName, "update account1")
-		// update the amount in ToAccount
-		account2, err := q.GetAccountForUpdate(ctx, arg.ToAccountID)
-		if err != nil {
-			return err
-		}
-		fmt.Println(txName, "get account for update2")
-		err = q.UpdateAccount(ctx, UpdateAccountParams{
-			ID:      arg.ToAccountID,
-			Balance: account2.Balance + arg.Amount,
-		})
-		if err != nil {
-			return err
-		}
-		fmt.Println(txName, "update account2")
-		return nil
 	})
 	return result, err
 
